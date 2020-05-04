@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosoital -List</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="./CSS/hosp.css">
+    <link href="//db.onlinewebfonts.com/c/0a6ee448d1bd65c56f6cf256a7c6f20a?family=Bahnschrift" rel="stylesheet"
+        type="text/css" />
+    <script src="./Scripts/hosp.js"></script>
+    <style>
+        #map {
+           
+            position: absolute;
+             top: 60px;
+            bottom: 40px;
+            left: 600px;
+            right: 20px;
+            border: 2px solid #707070;
+        }
+        .Mapp {
+            float: left;
+        }
+    </style>
+</head>
+<body onload="ShowTable()">
+    <div class="header">
+        <ul class="navbar">
+            <li class=><a href="index.html">Home</a></li>
+            <li class="navbar-right"><a href="#">&#9776</a>
+                <ul>
+                    <li><a href="#">link 1</a></li>
+                    <li><a href="#">link 2</a></li>
+                    <li><a href="#">link 3</a></li>
+                    <li><a href="#">link 4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="map" class="Mapp"></div>
+    <br>
+    
+    <p style="text-align: left;padding-left: 230px;color: whitesmoke;font-size: 1rem;" >
+        Hospitals In <b><span id="District"></span></b>
+    </p>
+    
+    <div >
+    <table   id="myTable" >
+        <tr>
+            <th style="width: 175px;">Name</th>
+            <th onclick="sortTable(1)">Total Beds</th>
+            <th onclick="sortTable(2)">ICU Occupied</th>
+            <th onclick="sortTable(3)">Estimate (after 4 hrs)</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="Medanta" onclick="addMarker(26.8555204,80.950910,'Medenta');  this.onclick=null;" /><label for="Medanta">Medenta
+                </label>
+            </td>
+            <td>1000</td>
+            <td>300</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="Apollo" onclick="addMarker(26.798117,80.901558,'Apollo'); this.onclick=null;" /><label for="Apollo">Apollo</label>
+            </td>
+            <td>330</td>
+            <td>110</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="SGPGI" onclick="addMarker(26.742874474,80.9448562765,'SGPGI'); this.onclick=null;" /><label for="SGPGI">SGPGI</label>
+            </td>
+            <td>1050</td>
+            <td>146</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="KGMU" onclick="addMarker(26.867716,80.916626,'KGMU'); this.onclick=null;" /><label for="KGMU">KGMU</label>
+            </td>
+            <td>103</td>
+            <td>4</td>
+            <td>0</td>
+        </tr>
+    </table>
+    </div>
+    <br><br>
+    <button class="btn" onclick="removemarker()">Clear Selection</button>
+</div>
+    <div class="footer">
+        <a href="./aboutUs.html">About US</a>
+        <a href="#">Feedback</a>
+    </div>
+
+    <script>
+       document.getElementById("District").innerHTML = localStorage.getItem("city");
+        
+        var map = L.map("map").setView([20.5937, 78.9629], 4);
+
+        L.tileLayer(
+            "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=AgctvI7cTmhsQAP2w8Nt",
+            {
+                attribution:
+                    '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+            }
+        ).addTo(map);
+        function ShowTable() {
+                if (localStorage.getItem("city") == "Lucknow") {
+                    x = document.getElementById("myTable");
+                    x.className = "Show";
+                   map.setView(new L.LatLng(26.8467,80.9462), 10)
+                }
+            }
+        function sortTable(c) {
+                var table, rows, switching, i, x, y, shouldSwitch;
+                table = document.getElementById("myTable");
+                switching = true;
+                /*Make a loop that will continue until no switching has been done:*/
+                while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the first, which contains table headers):*/
+                    for (i = 1; i < rows.length - 1; i++) {
+                        //start by saying there should be no switching:
+                        shouldSwitch = false;
+                        /*Get the two elements you want to compare,
+                                      one from current row and one from the next:*/
+                        x = rows[i].getElementsByTagName("TD")[c];
+                        y = rows[i + 1].getElementsByTagName("TD")[c];
+                        //check if the two rows should switch place:
+                        if (c > 0) {
+                            if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                        //    else {
+                        //     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //       //if so, mark as a switch and break the loop:
+                        //       shouldSwitch = true;
+                        //       break;
+                        //     }
+                    }
+                
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                                  and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+}
+
+    function addMarker(a,b,c){
+        var marker = L.marker([a, b],{Title:"c" }).addTo(map);
+        marker.bindPopup(c).openPopup();
+         
+
+    }
+
+    function removemarker(){
+        location.reload();
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+html,
+body {
+  height: 100%;
+  /* background: linear-gradient(to bottom, #3399ff, #66ffff); */
+  /* background-image: url(../Images/background.jpg); */
+  margin: 0;
+  background-color: #181818;
+  font-family: Bahnschrift;
+}
+
+nav {
+  width: 100%;
+  display: block;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.navbar {
+  background-color: black;
+}
+nav ul {
+  background-color: black;
+}
+
+ul li {
+  float: left;
+  background-color: black;
+  width: 150px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+ul li.navbar-left {
+  float: left;
+}
+ul li.navbar-right {
+  float: right;
+}
+
+ul li a {
+  display: block;
+  text-decoration: none;
+  color: wheat;
+}
+ul li a:hover {
+  background-color: green;
+}
+
+ul li ul li {
+  display: none;
+}
+
+ul li:hover ul li {
+  display: block;
+}
+
+div {
+  display: block;
+}
+.header {
+  width: 100%;
+  height: 40px;
+  background: black;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: right;
+}
+.footer a {
+  color: wheat;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.formbox {
+  width: 300px;
+  height: 350px;
+  position: relative;
+
+  margin: 6% auto;
+  background: wheat;
+  padding: 5px;
+}
+
+.btnbox {
+  width: 150px;
+  margin: 20px auto;
+  box-shadow: 0 0 5px 4px rgb(116, 170, 140);
+  border-radius: 30px;
+}
+
+.toggle {
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  margin: 0 auto;
+  outline: none;
+  background: linear-gradient(to right, rgb(41, 129, 79), rgb(98, 179, 133));
+  border-radius: 10px;
+}
+
+#btn {
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(to right, rgb(41, 129, 79), rgb(98, 179, 133));
+  border-radius: 30px;
+  transition: 0.5s;
+}

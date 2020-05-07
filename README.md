@@ -2,10 +2,10 @@
 Hospital Occupancy Dashboard for Covid-19
 
 • HOOD-19 provides a centralized Dashboard for all the Hospitals State-Wise
-(in India) and District-wise.
+(in India) and District-wise and displays predictions of the resources.
 
 • Live Information* of available and occupied ICUs and Ventilators are
-displayed on the Dashboard.
+displayed on the Dashboard along with predicted values in time to come.
 
 • Ministry has over 100k beds in 601 hospitals for COVID-19 and HOOD-19
 will provide track of all the beds and their availability in a dashboard.
